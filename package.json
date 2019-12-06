@@ -46,9 +46,9 @@
 		"@types/node": "^12.12.14",
 		"merge-options": "^1.0.1",
 		"rimraf": "^3.0.0",
-		"ts-loader": "^5.4.5",
-		"typescript": "^3.7.2",
-		"webpack": "^4.39.2",
-		"webpack-cli": "^3.3.7"
+		"ts-loader": "^6.2.1",
+		"typescript": "^3.7.3",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10"
 	}
 }

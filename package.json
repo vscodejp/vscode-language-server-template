@@ -1,0 +1,54 @@
+{
+	"name": "lsp-sample",
+	"displayName": "lsp-sample",
+	"description": "Language Server Sample Extension",
+	"version": "0.0.1",
+	"author": "Yuki Ueda",
+	"publisher": "Ikuyadeu",
+	"license": "SEE LICENSE IN LICENSE",
+	"galleryBanner": {
+		"color": "#FFFFFF",
+		"theme": "light"
+	},
+	"keywords": [
+		"Coding Style"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ikuyadeu/vscode-language-server-template"
+	},
+	"bugs": {
+		"url": "https://github.com/Ikuyadeu/vscode-language-server-template/issues"
+	},
+	"engines": {
+		"vscode": "^1.40.0"
+	},
+	"categories": [
+		"Linters",
+		"Formatters"
+	],
+	"activationEvents": [
+		"onCommand:sample.fix"
+	],
+	"main": "./client/out/extension",
+	"scripts": {
+		"vscode:prepublish": "npm run webpack",
+		"webpack": "npm run clean && webpack --mode production --config ./client/webpack.config.js && webpack --mode production --config ./server/webpack.config.js",
+		"webpack:dev": "npm run clean && webpack --mode none --config ./client/webpack.config.js && webpack --mode none --config ./server/webpack.config.js",
+		"compile": "tsc -b",
+		"compile:client": "tsc -b ./client/tsconfig.json",
+		"compile:server": "tsc -b ./server/tsconfig.json",
+		"watch": "tsc -b -w",
+		"clean": "rimraf client/out && rimraf server/out",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+	},
+	"devDependencies": {
+		"@types/node": "^12.12.14",
+		"merge-options": "^1.0.1",
+		"rimraf": "^3.0.0",
+		"ts-loader": "^5.4.5",
+		"typescript": "^3.7.2",
+		"webpack": "^4.39.2",
+		"webpack-cli": "^3.3.7"
+	}
+}

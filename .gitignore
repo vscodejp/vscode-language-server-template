@@ -1,3 +1,17 @@
+# Language server output
+
+*.vsix
+node_modules
+client/out
+client/node_modules
+server/out
+server/node_modules
+server/samples
+
+# Mac finder file
+
+.DS_Store
+
 # Logs
 logs
 *.log

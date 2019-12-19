@@ -1,0 +1,63 @@
+[
+    {
+        "condition": [
+            "show(${0:column}, ${1:preservalFocus})"
+        ],
+        "consequent": [
+            "show(${1:preservalFocus})"
+        ]
+    },
+    {
+        "condition": [
+            "editor.hide()"
+        ],
+        "consequent": [
+            "workbench.action.closeActiveEditor()"
+        ]
+    },
+    {
+        "condition": [
+            "editor.show(${1:column})"
+        ],
+        "consequent": [
+            "window.showTextDocument()"
+        ]
+    },
+    {
+        "condition": [
+            "MarkedString"
+        ],
+        "consequent": [
+            "MarkdownString"
+        ]
+    },
+    {
+        "condition": [
+            "withScmProgress"
+        ],
+        "consequent": [
+            "withProgress"
+        ]
+    },
+    {
+        "condition": [
+            "const ${0:value} = workspace.rootPath"
+        ],
+        "consequent": [
+            "const folders = workspace.workspaceFolders;",
+            "if (folders === undefined) {",
+            "    return undefined;",
+            "}",
+            "const ${0:value} = folders[0].uri.path;"
+        ],
+        "description": "For the vscode, rootPath should be workspaceFolders"
+    },
+    {
+        "condition": [
+            "scm.inputBox"
+        ],
+        "consequent": [
+            "SourceControl.inputBox"
+        ]
+    }
+ ]

@@ -5,7 +5,6 @@ import {
     createConnection,
     Diagnostic,
     DiagnosticSeverity,
-    InitializeParams,
     Range,
     TextDocuments,
     TextDocumentSyncKind,
@@ -20,11 +19,8 @@ namespace CommandIDs {
 const connection = createConnection();
 connection.console.info(`Sample server running in node ${process.version}`);
 let documents!: TextDocuments<TextDocument>;
-let workspaceFolder: string | undefined;
 
-connection.onInitialize((params: InitializeParams) => {
-    const workspaceFolders = params.workspaceFolders;
-    workspaceFolder = workspaceFolders !== null ? workspaceFolders[0].uri : undefined;
+connection.onInitialize(() => {
     documents = new TextDocuments(TextDocument);
     setupDocumentsListeners();
 

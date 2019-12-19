@@ -2,7 +2,7 @@
 	"name": "client",
 	"displayName": "Sample Client",
 	"description": "Sample client into VS Code.",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"private": true,
 	"author": "Ikuyadeu",
 	"license": "MIT",

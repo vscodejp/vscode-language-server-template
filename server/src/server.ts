@@ -52,7 +52,7 @@ function validate(doc: TextDocument) {
     const diagnostics: Diagnostic[] = [];
     const range: Range = {start: {line: 0, character: 0},
                           end: {line: 0, character: Number.MAX_VALUE}};
-    diagnostics.push(Diagnostic.create(range, "Sample message", DiagnosticSeverity.Warning, "", "sample"));
+    diagnostics.push(Diagnostic.create(range, "Hello world", DiagnosticSeverity.Warning, "", "sample"));
     connection.sendDiagnostics({ uri: doc.uri, diagnostics });
 }
 

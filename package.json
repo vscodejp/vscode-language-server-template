@@ -3,16 +3,13 @@
 	"displayName": "lsp-sample",
 	"description": "Language Server Sample Extension",
 	"version": "0.0.1",
-	"author": "Yuki Ueda",
-	"publisher": "Ikuyadeu",
+	"author": "{Your name}",
+	"publisher": "{Your_outlook_name}",
 	"license": "SEE LICENSE IN LICENSE",
 	"galleryBanner": {
 		"color": "#FFFFFF",
 		"theme": "light"
 	},
-	"keywords": [
-		"Coding Style"
-	],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Ikuyadeu/vscode-language-server-template"
@@ -28,7 +25,8 @@
 		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:sample.fix"
+		"onLanguage:plaintext",
+		"onLanguage:markdown"
 	],
 	"main": "./client/out/extension",
 	"scripts": {

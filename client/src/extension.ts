@@ -20,6 +20,10 @@ export function activate(context: ExtensionContext): void {
             {
                 scheme: "file",
                 language: "plaintext",
+            },
+            {
+                scheme: "file",
+                language: "markdown",
             }],
         diagnosticCollectionName: "sample",
         revealOutputChannelOn: RevealOutputChannelOn.Never,

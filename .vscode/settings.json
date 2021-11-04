@@ -4,11 +4,42 @@
         "out": false // set this to true to hide the "out" folder with the compiled JS files
     },
     "search.exclude": {
-        "out": true // set this to false to include "out" folder in search results
+         // set this to false to include "out" folder in search results
+        "out": true,
+		"server": true
     },
+	"files.trimTrailingWhitespace": true,
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"typescript.tsdk": "./node_modules/typescript/lib",
     // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
     "typescript.tsc.autoDetect": "off",
-    "editor.tokenColorCustomizations": {
-        "semanticHighlighting": true
-    },
+	"typescript.tsserver.trace": "off",
+	"typescript.tsserver.log": "off",
+	"eslint.enable": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.useESLintClass": true,
+	"eslint.codeActionsOnSave.rules": [
+		"@typescript-eslint/semi",
+		"@typescript-eslint/indent",
+		"!@typescript-eslint/*",
+		"*"
+	],
+	"eslint.workingDirectories": [
+		"./client",
+		"./server"
+	],
+	"eslint.trace.server": "off",
+	"eslint.debug": false,
+	"eslint.lintTask.enable": false,
+	"eslint.format.enable": true,
+	"eslint.probe": [
+		"typescript",
+		"typescriptreact",
+		"html",
+		"vue",
+		"markdown"
+	]
 }

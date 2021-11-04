@@ -1,11 +1,12 @@
 {
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
+		"moduleResolution": "node",
 		"module": "commonjs",
-		"target": "es2017",
+		"target": "es2020",
 		"outDir": "out",
 		"rootDir": "src",
-		"lib": [ "es2017" ],
+		"lib": [ "es2020" ],
 		"sourceMap": true
 	},
 	"include": [

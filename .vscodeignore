@@ -1,16 +1,25 @@
 .vscode/**
 .github/**
+.gitignore
+.eslintignore
+contributing.md
+shared.webpack.config.js
 **/*.ts
 **/*.map
-.gitignore
 **/tsconfig.json
 **/tsconfig.base.json
-**/tslint.json
-contributing.md
-.azure-pipelines.yml
-shared.webpack.config.js
-client/**
+build/**
+
+# The client is web packed. So only ship extension.js
+client/*
+!client/out
+client/out/*
+client/out/package.json
 !client/out/extension.js
-server/**
-!server/out/server.js
-playgrounds/**
+
+# The server is web packed. So only ship eslintServer.js
+server/*
+!server/out
+server/out/*
+server/out/package.json
+!server/out/eslintServer.js

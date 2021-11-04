@@ -1,40 +1,27 @@
 # Sample Language Server
 
-### Installing
+## Installing
 
-```
+```sh
 npm install -g sample-server
 ```
 
 
-### Running the Language server
+## Running the Language server
 
-```
+```sh
 sample-server --studio
 ```
-
-
-
-## Editor Extension Support
-
-* [x] Visual Studio Code
-* [ ] Atom
-* [ ] Sublime Text
-* [ ] Vim/NeoVim
-* [ ] Emacs
 
 ### Visual Studio Code
 
 Sample Server for VS Code is available [here]()
 
-
 ### Atom IDE
-
-
 
 ### Sublime Text
 
-[LSP](https://github.com/tomv564/LSP) (untested)
+Please use [LSP](https://github.com/tomv564/LSP)
 
 ```json
 "samplesvr": {

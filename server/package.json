@@ -18,12 +18,12 @@
     "url": "https://github.com/Ikuyadeu/vscode-language-server-template/issues"
   },
   "dependencies": {
-    "vscode-languageserver-textdocument": "^1.0.1",
-    "vscode-languageserver": "6.1.1",
-    "vscode-uri": "^2.1.2"
+    "vscode-languageserver": "8.0.0-next.3",
+    "vscode-languageserver-textdocument": "^1.0.2",
+    "vscode-uri": "^3.0.2"
   },
   "devDependencies": {
-    "typescript": "^4.1.2"
+    "typescript": "^4.4.4"
   },
   "scripts": {}
 }

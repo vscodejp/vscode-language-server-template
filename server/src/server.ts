@@ -1,76 +1,95 @@
-"use strict";
+'use strict';
 
 import {
-    CodeActionKind,
-    createConnection,
-    Diagnostic,
-    DiagnosticSeverity,
-    Range,
-    TextDocuments,
-    TextDocumentSyncKind,
-} from "vscode-languageserver";
-import { TextDocument } from "vscode-languageserver-textdocument";
+	createConnection,
+	Diagnostic,
+	DiagnosticSeverity,
+	ProposedFeatures,
+	Range,
+	TextDocuments,
+	TextDocumentSyncKind,
+} from 'vscode-languageserver/node';
+import { TextDocument } from 'vscode-languageserver-textdocument';
 
-namespace CommandIDs {
-    export const fix = "sample.fix";
-}
-// Create a connection for the server. The connection uses Node's IPC as a transport.
-// Also include all preview / proposed LSP features.
-const connection = createConnection();
+// サーバーのコネクションを作成する。このコネクションはトランスポートはNodeのIPC(プロセス間通信)を利用する
+// LSPの全機能を提供する
+const connection = createConnection(ProposedFeatures.all);
 connection.console.info(`Sample server running in node ${process.version}`);
 let documents!: TextDocuments<TextDocument>;
 
-connection.onInitialize(() => {
-    documents = new TextDocuments(TextDocument);
-    setupDocumentsListeners();
+connection.onInitialize((_params, _cancel, progress) => {
+	progress.begin('Initializing Sample Server');
+	documents = new TextDocuments(TextDocument);
+	setupDocumentsListeners();
+	progress.done();
 
-    return {
-        capabilities: {
-            textDocumentSync: {
-                openClose: true,
-                change: TextDocumentSyncKind.Incremental,
-                willSaveWaitUntil: false,
-                save: {
-                    includeText: false,
-                },
-            },
-            codeActionProvider: {
-                codeActionKinds: [CodeActionKind.QuickFix],
-            },
-            executeCommandProvider: {
-                commands: [CommandIDs.fix],
-            },
-        },
-    };
+	return {
+		capabilities: {
+			textDocumentSync: {
+				openClose: true,
+				change: TextDocumentSyncKind.Incremental,
+				willSaveWaitUntil: false,
+				save: {
+					includeText: false,
+				}
+			}
+		},
+	};
 });
 
 /**
- * Analyzes the text document for problems.
- * @param doc text document to analyze
+ * テキストドキュメントを検証する
+ * @param doc 検証対象ドキュメント
  */
 function validate(doc: TextDocument) {
-    const diagnostics: Diagnostic[] = [];
-    const range: Range = {start: {line: 0, character: 0},
-                          end: {line: 0, character: Number.MAX_VALUE}};
-    diagnostics.push(Diagnostic.create(range, "Hello world", DiagnosticSeverity.Warning, "", "sample"));
-    connection.sendDiagnostics({ uri: doc.uri, diagnostics });
+	const diagnostics: Diagnostic[] = [];
+	// 0行目(エディタ上の行番号は1から)の端から端までに警告
+	const range: Range = {start: {line: 0, character: 0},
+		end: {line: 0, character: Number.MAX_VALUE}};
+	const diagnostic: Diagnostic = {
+		// 警告範囲
+		range: range,
+		// 警告メッセージ
+		message: 'Hello world',
+		// 警告の重要度、Error, Warning, Information, Hintのいずれかを選ぶ
+		severity: DiagnosticSeverity.Warning,
+		// 警告コード、警告コードを識別するために使用する
+		code: '',
+		// 警告を発行したソース、例: eslint, typescript
+		source: 'sample',
+	};
+	diagnostics.push(diagnostic);
+	connection.sendDiagnostics({ uri: doc.uri, diagnostics });
 }
 
+
+/**
+ * ドキュメントの動作を監視する
+ */
 function setupDocumentsListeners() {
-    documents.listen(connection);
+	// ドキュメントを作成、変更、閉じる作業を監視するマネージャー
+	documents.listen(connection);
 
-    documents.onDidOpen((event) => {
-        validate(event.document);
-    });
+	// 開いた時
+	documents.onDidOpen((event) => {
+		validate(event.document);
+	});
 
-    documents.onDidChangeContent((change) => {
-        validate(change.document);
-    });
+	// 変更した時
+	documents.onDidChangeContent((change) => {
+		validate(change.document);
+	});
 
-    documents.onDidClose((close) => {
-        connection.sendDiagnostics({ uri: close.document.uri, diagnostics: []});
-    });
+	// 保存した時
+	documents.onDidSave((change) => {
+		validate(change.document);
+	});
 
+	// 閉じた時
+	documents.onDidClose((close) => {
+		const uri = close.document.uri;
+		connection.sendDiagnostics({ uri: uri, diagnostics: []});
+	});
 }
 
 // Listen on the connection

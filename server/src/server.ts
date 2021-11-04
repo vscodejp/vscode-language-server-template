@@ -18,6 +18,7 @@ connection.console.info(`Sample server running in node ${process.version}`);
 // 初期化ハンドルでインスタンス化する
 let documents!: TextDocuments<TextDocument>;
 
+// 接続の初期化
 connection.onInitialize((_params, _cancel, progress) => {
 	// サーバーの起動を進捗表示する
 	progress.begin('Initializing Sample Server');
@@ -48,10 +49,12 @@ connection.onInitialize((_params, _cancel, progress) => {
  * @param doc 検証対象ドキュメント
  */
 function validate(doc: TextDocument) {
+	// 警告などの状態を管理するリスト
 	const diagnostics: Diagnostic[] = [];
 	// 0行目(エディタ上の行番号は1から)の端から端までに警告
 	const range: Range = {start: {line: 0, character: 0},
 		end: {line: 0, character: Number.MAX_VALUE}};
+	// 警告を追加する
 	const diagnostic: Diagnostic = {
 		// 警告範囲
 		range: range,
@@ -65,6 +68,7 @@ function validate(doc: TextDocument) {
 		source: 'sample',
 	};
 	diagnostics.push(diagnostic);
+	//接続に警告を通知する
 	connection.sendDiagnostics({ uri: doc.uri, diagnostics });
 }
 
@@ -93,7 +97,9 @@ function setupDocumentsListeners() {
 
 	// 閉じた時
 	documents.onDidClose((close) => {
+		// ドキュメントのURI(ファイルパス)を取得する
 		const uri = close.document.uri;
+		// 警告を削除する
 		connection.sendDiagnostics({ uri: uri, diagnostics: []});
 	});
 }

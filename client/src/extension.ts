@@ -30,10 +30,12 @@ export function activate(context: ExtensionContext): void {
 	};
 	// LSPとの通信に使うリクエストを定義
 	const clientOptions: LanguageClientOptions = {
+		// 対象とするファイルの種類や拡張子
 		documentSelector: [
 			{ scheme: 'file' },
 			{ scheme: 'untitled' }
 		],
+		// 警告パネルでの表示名
 		diagnosticCollectionName: 'sample',
 		revealOutputChannelOn: RevealOutputChannelOn.Never,
 		initializationOptions: {},

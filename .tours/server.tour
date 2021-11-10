@@ -1,0 +1,56 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Sever",
+  "steps": [
+    {
+      "file": "server/package.json",
+      "description": "`server/package.json`でサーバー側の依存パッケージ`vscode-languageserver`(サーバー全般の機能)と`vscode-languageserver-textdocument`(ファイル管理機能)を取得します．",
+      "line": 22,
+      "selection": {
+        "start": {
+          "line": 21,
+          "character": 1
+        },
+        "end": {
+          "line": 23,
+          "character": 1
+        }
+      },
+      "title": "依存関係の取得"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "ファイルの一行目にHello Worldという警告を生成する関数．",
+      "line": 73,
+      "selection": {
+        "start": {
+          "line": 51,
+          "character": 1
+        },
+        "end": {
+          "line": 74,
+          "character": 1
+        }
+      },
+      "title": "警告生成関数"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "警告を生成するには\n\n* range: 警告範囲\n* message: 警告メッセージ\n* severity: 警告の重要度\n* code: 警告の識別子\n* source: 警告を発行したソース\n\nを定義します．",
+      "line": 69,
+      "selection": {
+        "start": {
+          "line": 55,
+          "character": 1
+        },
+        "end": {
+          "line": 69,
+          "character": 4
+        }
+      },
+      "title": "警告の内容"
+    }
+  ],
+  "ref": "master",
+  "description": "サーバーサイドのソースコードを説明します"
+}

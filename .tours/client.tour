@@ -1,0 +1,22 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Client",
+  "steps": [
+    {
+      "file": "package.json",
+      "description": "プレーンテキストやマークダウンファイルを(拡張子が`.txt`または`.md`)開いたときにクライアントを起動する．",
+      "line": 30,
+      "selection": {
+        "start": {
+          "line": 27,
+          "character": 1
+        },
+        "end": {
+          "line": 31,
+          "character": 1
+        }
+      }
+    }
+  ],
+  "ref": "master"
+}

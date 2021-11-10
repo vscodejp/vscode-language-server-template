@@ -4,7 +4,7 @@
   "steps": [
     {
       "file": "README.md",
-      "description": "まずはスケルトンプロジェクトがどのような構造になっているか、順番に見ていきます。",
+      "description": "このCodeTourではスケルトンプロジェクトがどのような構造になっているか，順番に見ていきます．\n\n本テンプレートでは\n* サーバーサイドのソースコード `server/src/server.ts`\n* クライアントサイドのソースコード `client/src/extension.ts`\n* プロジェクトのメタファイル `package.json`\n\nを解説します．\n\nより本格的な実装内容は別ブランチの`linter`または`completions`のCodeTourを参照ください．",
       "line": 1
     }
   ],

@@ -32,7 +32,7 @@
           "character": 1
         }
       },
-      "title": "警告生成関数"
+      "title": "警告を生成する関数作成"
     },
     {
       "file": "server/src/server.ts",

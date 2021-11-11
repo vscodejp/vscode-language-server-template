@@ -1,11 +1,11 @@
 'use strict';
 
 import {
+	CompletionItem,
+	CompletionItemKind,
 	createConnection,
-	Diagnostic,
-	DiagnosticSeverity,
 	ProposedFeatures,
-	Range,
+	TextDocumentPositionParams,
 	TextDocuments,
 	TextDocumentSyncKind,
 } from 'vscode-languageserver/node';
@@ -39,39 +39,13 @@ connection.onInitialize((_params, _cancel, progress) => {
 				save: {
 					includeText: false,
 				}
+			},
+			completionProvider: {
+				resolveProvider: true
 			}
 		},
 	};
 });
-
-/**
- * テキストドキュメントを検証する
- * @param doc 検証対象ドキュメント
- */
-function validate(doc: TextDocument) {
-	// 警告などの状態を管理するリスト
-	const diagnostics: Diagnostic[] = [];
-	// 0行目(エディタ上の行番号は1から)の端から端までに警告
-	const range: Range = {start: {line: 0, character: 0},
-		end: {line: 0, character: Number.MAX_VALUE}};
-	// 警告を追加する
-	const diagnostic: Diagnostic = {
-		// 警告範囲
-		range: range,
-		// 警告メッセージ
-		message: 'Hello world',
-		// 警告の重要度、Error, Warning, Information, Hintのいずれかを選ぶ
-		severity: DiagnosticSeverity.Warning,
-		// 警告コード、警告コードを識別するために使用する
-		code: '',
-		// 警告を発行したソース、例: eslint, typescript
-		source: 'sample',
-	};
-	diagnostics.push(diagnostic);
-	//接続に警告を通知する
-	connection.sendDiagnostics({ uri: doc.uri, diagnostics });
-}
-
 
 /**
  * ドキュメントの動作を監視する
@@ -79,29 +53,42 @@ function validate(doc: TextDocument) {
 function setupDocumentsListeners() {
 	// ドキュメントを作成、変更、閉じる作業を監視するマネージャー
 	documents.listen(connection);
+	// 補完機能の要素リスト
+	connection.onCompletion(
+		(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
+			return [
+				{
+					// 補完を表示する文字列
+					label: 'VS Code',
+					// コード補完の種類、ここではTextを選ぶがMethodなどもある
+					kind: CompletionItemKind.Text,
+					// 補完リスト上でのラベル
+					data: 1
+				},
+				{
+					label: 'Visual Studio Code',
+					kind: CompletionItemKind.Text,
+					data: 2
+				}
+			];
+		}
+	);
 
-	// 開いた時
-	documents.onDidOpen((event) => {
-		validate(event.document);
-	});
-
-	// 変更した時
-	documents.onDidChangeContent((change) => {
-		validate(change.document);
-	});
-
-	// 保存した時
-	documents.onDidSave((change) => {
-		validate(change.document);
-	});
-
-	// 閉じた時
-	documents.onDidClose((close) => {
-		// ドキュメントのURI(ファイルパス)を取得する
-		const uri = close.document.uri;
-		// 警告を削除する
-		connection.sendDiagnostics({ uri: uri, diagnostics: []});
-	});
+	// ラベル付けされた補完リストの詳細を取得する
+	connection.onCompletionResolve(
+		(item: CompletionItem): CompletionItem => {
+			if (item.data === 1) {
+				// 詳細名
+				item.detail = 'VS Code 詳細';
+				// 詳細ドキュメント
+				item.documentation = 'VS Code 詳細ドキュメント';
+			} else if (item.data === 2) {
+				item.detail = 'Visual Studio Code 詳細';
+				item.documentation = 'Visual Studio Code 詳細ドキュメント';
+			}
+			return item;
+		}
+	);
 }
 
 // Listen on the connection

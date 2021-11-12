@@ -36,7 +36,7 @@
     },
     {
       "file": "server/src/server.ts",
-      "description": "警告を生成するには\n\n* range: 警告範囲\n* message: 警告メッセージ\n* severity: 警告の重要度\n* code: 警告の識別子\n* source: 警告を発行したソース\n\nを定義します．",
+      "description": "警告を生成するには\n\n* range: 警告範囲\n* message: 警告メッセージ\n* severity: 警告の重要度\n* code: 警告の識別子\n* source: 警告を発行したソース\n\nを定義する．",
       "line": 69,
       "selection": {
         "start": {

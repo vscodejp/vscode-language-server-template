@@ -8,5 +8,6 @@
       "line": 1
     }
   ],
-  "ref": "master"
+  "ref": "master",
+  "description": "本ハンズオンの概要を説明します．"
 }

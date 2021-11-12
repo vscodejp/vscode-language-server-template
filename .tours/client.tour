@@ -15,8 +15,74 @@
           "line": 31,
           "character": 1
         }
-      }
+      },
+      "title": "拡張機能起動条件"
+    },
+    {
+      "file": "client/package.json",
+      "description": "拡張機能を実行する環境．今回はVS Code 1.61.0 以上を前提とする．",
+      "line": 18,
+      "selection": {
+        "start": {
+          "line": 16,
+          "character": 1
+        },
+        "end": {
+          "line": 18,
+          "character": 4
+        }
+      },
+      "title": "拡張機能実行環境設定"
+    },
+    {
+      "file": "client/package.json",
+      "description": "利用する依存関係．\n全体の依存関係として，Language Serverのクライアントパッケージ`vscode-languageclient`を，\n開発用(`devDependencies`)にはvscodeを使う．",
+      "line": 24,
+      "selection": {
+        "start": {
+          "line": 19,
+          "character": 1
+        },
+        "end": {
+          "line": 25,
+          "character": 1
+        }
+      },
+      "title": "依存関係の定義"
+    },
+    {
+      "file": "client/src/extension.ts",
+      "description": "クライアント側のソースコードファイル`client/src/extension.ts`．\n通常のVS Code拡張機能として実装しているため，VS Code APIを利用している．",
+      "line": 3,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 4,
+          "character": 1
+        }
+      },
+      "title": "クライアントサイドのソースコード"
+    },
+    {
+      "file": "client/src/extension.ts",
+      "description": "誤って　`... from 'vscode-languageclient';`\nと間違えないよう注意．最新版では `/node` まで必要",
+      "line": 9,
+      "selection": {
+        "start": {
+          "line": 4,
+          "character": 1
+        },
+        "end": {
+          "line": 10,
+          "character": 1
+        }
+      },
+      "title": "API呼び出しの際の注意点"
     }
   ],
-  "ref": "master"
+  "ref": "master",
+  "description": "クライアントサイドのソースコードを説明します"
 }

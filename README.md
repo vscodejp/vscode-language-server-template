@@ -18,9 +18,9 @@ code .
 3. リンター機能，補完機能のコードを見るにはブランチを切り替えてください．
 
 ```sh
-git checkout -b linter
+git checkout linter
 # または
-git checkout -b completion
+git checkout completions
 ```
 
 ## このREADMEの使い方

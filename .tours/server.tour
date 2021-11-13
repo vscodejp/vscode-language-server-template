@@ -20,16 +20,32 @@
     },
     {
       "file": "server/src/server.ts",
-      "description": "ファイルの一行目にHello Worldという警告を生成する関数．",
-      "line": 73,
+      "description": "サーバーの初期化リクエストを送る",
+      "line": 45,
       "selection": {
         "start": {
-          "line": 51,
+          "line": 32,
+          "character": 1
+        },
+        "end": {
+          "line": 45,
+          "character": 24
+        }
+      },
+      "title": "サーバーの初期化"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "ファイルの一行目にHello Worldという警告を生成する関数．",
+      "line": 74,
+      "selection": {
+        "start": {
+          "line": 48,
           "character": 1
         },
         "end": {
           "line": 74,
-          "character": 1
+          "character": 2
         }
       },
       "title": "警告を生成する関数作成"
@@ -37,15 +53,15 @@
     {
       "file": "server/src/server.ts",
       "description": "警告を生成するには\n\n* range: 警告範囲\n* message: 警告メッセージ\n* severity: 警告の重要度\n* code: 警告の識別子\n* source: 警告を発行したソース\n\nを定義する．",
-      "line": 69,
+      "line": 70,
       "selection": {
         "start": {
-          "line": 55,
+          "line": 59,
           "character": 1
         },
         "end": {
-          "line": 69,
-          "character": 4
+          "line": 71,
+          "character": 1
         }
       },
       "title": "警告の内容"

@@ -6,7 +6,6 @@
 npm install -g sample-server
 ```
 
-
 ## Running the Language server
 
 ```sh

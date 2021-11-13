@@ -4,6 +4,7 @@ import {
 	createConnection,
 	Diagnostic,
 	DiagnosticSeverity,
+	InitializeResult,
 	ProposedFeatures,
 	Range,
 	TextDocuments,
@@ -41,7 +42,7 @@ connection.onInitialize((_params, _cancel, progress) => {
 				}
 			}
 		},
-	};
+	} as InitializeResult;
 });
 
 /**

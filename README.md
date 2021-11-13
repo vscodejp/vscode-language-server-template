@@ -1,5 +1,30 @@
 # vscode-language-server-template README
 
+## このテンプレートの使い方
+
+1. git clone機能を使って、vscode-language-server-templateをcloneします。
+
+```sh
+git clone https://github.com/vscodejp/vscode-language-server-template.git
+```
+
+2. VS Codeを起動し、vscode-language-server-templateのフォルダを開きます。
+
+```sh
+cd vscode-language-server-template
+code .
+```
+
+3. リンター機能，補完機能のコードを見るにはブランチを切り替えてください．
+
+```sh
+git checkout -b linter
+# または
+git checkout -b completion
+```
+
+## このREADMEの使い方
+
 "vscode-language-server-template"のREADMEテンプレートです。
 実装の内容に従って以下のコンテンツを追加してください。
 

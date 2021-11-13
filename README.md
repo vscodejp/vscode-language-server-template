@@ -18,8 +18,10 @@ code .
 3. リンター機能，補完機能のコードを見るにはブランチを切り替えてください．
 
 ```sh
+git checkout -b linter origin/linter
 git checkout linter
 # または
+git checkout -b completions origin/completions
 git checkout completions
 ```
 

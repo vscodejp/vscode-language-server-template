@@ -6,11 +6,5 @@
 
 ## 機能
 
-* 補完機能
-* TODO: 設定を反映した補完機能
-
-## 設定
-
-本拡張機能は以下を[設定](https://code.visualstudio.com/docs/getstarted/settings)可能です:
-
-* `sampleserver.comletionitems`: 補完する単語リストを管理する。標準では`VS Code`, `Visual Studio Code`になっています。
+* 1行目なら`VS Code`, `Visual Studio Code`を補完
+* 2行目以降ならファイル名を補完

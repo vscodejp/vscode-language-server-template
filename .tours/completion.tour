@@ -1,0 +1,103 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Completion",
+  "steps": [
+    {
+      "file": "server/src/server.ts",
+      "description": "サーバー初期化時にコード補完機能を提供する`completionProvider`を定義する",
+      "line": 45,
+      "selection": {
+        "start": {
+          "line": 43,
+          "character": 1
+        },
+        "end": {
+          "line": 45,
+          "character": 5
+        }
+      },
+      "title": "サーバーの初期化設定"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "connection.onCompletionで補完機能を定義する",
+      "line": 57,
+      "selection": {
+        "start": {
+          "line": 57,
+          "character": 1
+        },
+        "end": {
+          "line": 57,
+          "character": 26
+        }
+      },
+      "title": "補完機能の定義"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "引数`textDocumentPosition`からカーソルの位置を取得する",
+      "line": 60,
+      "selection": {
+        "start": {
+          "line": 58,
+          "character": 1
+        },
+        "end": {
+          "line": 60,
+          "character": 51
+        }
+      },
+      "title": "ファイル情報の取得"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "`VS Code`や`Visual Studio Code`を補完するリストを返す．",
+      "line": 77,
+      "selection": {
+        "start": {
+          "line": 61,
+          "character": 1
+        },
+        "end": {
+          "line": 77,
+          "character": 7
+        }
+      },
+      "title": "補完要素リストの定義"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "ファイル名を取得し，補完リストとして返す",
+      "line": 87,
+      "selection": {
+        "start": {
+          "line": 79,
+          "character": 1
+        },
+        "end": {
+          "line": 87,
+          "character": 6
+        }
+      },
+      "title": "ファイル名の取得"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "補完リストのラベルに応じて詳細やドキュメントを定義する",
+      "line": 105,
+      "selection": {
+        "start": {
+          "line": 92,
+          "character": 1
+        },
+        "end": {
+          "line": 105,
+          "character": 4
+        }
+      },
+      "title": "詳細情報の定義"
+    }
+  ],
+  "ref": "completions"
+}

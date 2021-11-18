@@ -55,18 +55,32 @@ function setupDocumentsListeners() {
 	documents.listen(connection);
 	// 補完機能の要素リスト
 	connection.onCompletion(
-		(_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
+		(textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
+			// 1行目の場合はVS CodeとVisual Studio Codeを返す
+			if (textDocumentPosition.position.line === 0) {
+				return [
+					{
+						// 補完を表示する文字列
+						label: 'VS Code',
+						// コード補完の種類、ここではTextを選ぶがMethodなどもある
+						kind: CompletionItemKind.Text,
+						// 補完リスト上でのラベル
+						data: 1
+					}, {
+						// 補完を表示する文字列
+						label: 'Visual Studio Code',
+						// コード補完の種類、ここではTextを選ぶがMethodなどもある
+						kind: CompletionItemKind.Text,
+						// 補完リスト上でのラベル
+						data: 1
+					}
+				];
+			}
+			// 2行目以降はファイル名を返す
+			const fileUri = textDocumentPosition.textDocument.uri;
 			return [
 				{
-					// 補完を表示する文字列
-					label: 'VS Code',
-					// コード補完の種類、ここではTextを選ぶがMethodなどもある
-					kind: CompletionItemKind.Text,
-					// 補完リスト上でのラベル
-					data: 1
-				},
-				{
-					label: 'Visual Studio Code',
+					label: fileUri.substr(fileUri.lastIndexOf('/') + 1),
 					kind: CompletionItemKind.Text,
 					data: 2
 				}
@@ -81,10 +95,10 @@ function setupDocumentsListeners() {
 				// 詳細名
 				item.detail = 'VS Code 詳細';
 				// 詳細ドキュメント
-				item.documentation = 'VS Code 詳細ドキュメント';
-			} else if (item.data === 2) {
-				item.detail = 'Visual Studio Code 詳細';
 				item.documentation = 'Visual Studio Code 詳細ドキュメント';
+			} else if (item.data === 2) {
+				item.detail = '現在のファイル名';
+				item.documentation = 'ファイル名 詳細ドキュメント';
 			}
 			return item;
 		}

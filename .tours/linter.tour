@@ -1,0 +1,87 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Linter",
+  "steps": [
+    {
+      "file": "server/src/server.ts",
+      "description": "正規表現を用いて，２文字以上の大文字を検出する．",
+      "line": 100,
+      "selection": {
+        "start": {
+          "line": 72,
+          "character": 1
+        },
+        "end": {
+          "line": 100,
+          "character": 3
+        }
+      },
+      "title": "コード検証機能の編集"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "CodeActionなど修正コマンドで利用するモジュールを取得する",
+      "line": 15,
+      "selection": {
+        "start": {
+          "line": 4,
+          "character": 1
+        },
+        "end": {
+          "line": 15,
+          "character": 33
+        }
+      },
+      "title": "利用するモジュールの取得"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "サーバーの初期化でコードをワンクリックで修正する`QuickFix`を定義する．",
+      "line": 59,
+      "selection": {
+        "start": {
+          "line": 53,
+          "character": 1
+        },
+        "end": {
+          "line": 59,
+          "character": 6
+        }
+      },
+      "title": "サーバー初期化設定の編集"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "コードに対して関数を実行するCodeActionのリストを定義",
+      "line": 149,
+      "selection": {
+        "start": {
+          "line": 149,
+          "character": 1
+        },
+        "end": {
+          "line": 149,
+          "character": 40
+        }
+      },
+      "title": "CodeActionの宣言"
+    },
+    {
+      "file": "server/src/server.ts",
+      "description": "生成した各警告に該当する文字を小文字に修正するCode Actionsを定義する．",
+      "line": 176,
+      "selection": {
+        "start": {
+          "line": 150,
+          "character": 1
+        },
+        "end": {
+          "line": 176,
+          "character": 6
+        }
+      },
+      "title": "CodeAction内容の定義"
+    }
+  ],
+  "ref": "linter"
+}

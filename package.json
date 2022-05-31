@@ -3,8 +3,8 @@
 	"displayName": "lsp-sample",
 	"description": "Language Server Sample Extension",
 	"version": "0.0.1",
-	"author": "{Your name}",
-	"publisher": "{Your_outlook_name}",
+	"author": "vscode-jp",
+	"publisher": "vscode-jp",
 	"license": "SEE LICENSE IN LICENSE",
 	"galleryBanner": {
 		"color": "#FFFFFF",
@@ -18,15 +18,14 @@
 		"url": "https://github.com/Ikuyadeu/vscode-language-server-template/issues"
 	},
 	"engines": {
-		"vscode": "^1.61.0"
+		"vscode": "^1.67.0"
 	},
 	"categories": [
 		"Linters",
 		"Formatters"
 	],
 	"activationEvents": [
-		"onLanguage:plaintext",
-		"onLanguage:markdown"
+		"*"
 	],
 	"main": "./client/out/extension",
 	"scripts": {
@@ -41,15 +40,19 @@
 		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
 	},
 	"devDependencies": {
-		"@types/node": "16.11.6",
-		"@typescript-eslint/eslint-plugin": "^5.3.0",
-		"@typescript-eslint/parser": "^5.3.0",
-		"eslint": "^8.1.0",
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.1",
+		"@types/node": "17.0.36",
+		"@typescript-eslint/eslint-plugin": "^5.26.0",
+		"@typescript-eslint/parser": "^5.26.0",
+		"eslint": "^8.16.0",
+		"glob": "^8.0.3",
 		"merge-options": "^3.0.4",
 		"rimraf": "^3.0.2",
-		"ts-loader": "^9.2.6",
-		"typescript": "^4.4.4",
-		"webpack": "^5.61.0",
-		"webpack-cli": "^4.9.1"
+		"ts-loader": "^9.3.0",
+		"typescript": "^4.7.2",
+		"mocha": "^10.0.0",
+		"webpack": "^5.72.1",
+		"webpack-cli": "^4.9.2"
 	}
 }

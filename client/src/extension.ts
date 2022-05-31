@@ -8,8 +8,10 @@ import {
 	ServerOptions,
 	TransportKind } from 'vscode-languageclient/node';
 
+let client: LanguageClient;
+
 // 拡張機能が有効になったときに呼ばれる
-export function activate(context: ExtensionContext): void {
+export async function activate(context: ExtensionContext) {
 	// サーバーのパスを取得
 	const serverModule =  Uri.joinPath(context.extensionUri, 'server', 'out', 'server.js').fsPath;
 	// デバッグ時の設定
@@ -42,7 +44,6 @@ export function activate(context: ExtensionContext): void {
 		progressOnInitialization: true,
 	};
 
-	let client: LanguageClient;
 	try {
 		// LSPを起動
 		client = new LanguageClient('Sample LSP Server', serverOptions, clientOptions);
@@ -50,9 +51,11 @@ export function activate(context: ExtensionContext): void {
 		void Window.showErrorMessage('拡張機能の起動に失敗しました。詳細はアウトプットパネルを参照ください');
 		return;
 	}
+	client.start().catch((error) => client.error(`Starting the server failed.`, error, 'force'));
+}
 
-	// 拡張機能のコマンドを登録
-	context.subscriptions.push(
-		client.start(),
-	);
+export async function deactivate(): Promise<void> {
+	if (client) {
+		await client.stop();
+	}
 }

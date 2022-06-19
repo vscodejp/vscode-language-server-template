@@ -5,16 +5,28 @@ import { getDocUri, activate } from './helper';
 suite('Should get diagnostics', () => {
 	const docUri = getDocUri('diagnostics.txt');
 
-	test('Diagnostics Hello World', async () => {
-		const start = new vscode.Position(0, 0);
-		const end = new vscode.Position(0, Number.MAX_VALUE);
+	test('Diagnostics Upper to lower', async () => {
 		await testDiagnostics(docUri, [
 			{
-				message: 'Hello world',
-				range: new vscode.Range(start, end),
+				message: 'COBOL is all uppercase.',
+				// 2行目のCOBOLに警告を出すか検証
+				range: new vscode.Range(
+					new vscode.Position(1, 0),
+					new vscode.Position(1, 5)
+				),
 				severity: vscode.DiagnosticSeverity.Warning,
 				source: 'sample'
-			}
+			},
+			{
+				message: 'PHP is all uppercase.',
+				range: new vscode.Range(
+					// 6行目のPHPに警告を出すか検証
+					new vscode.Position(5, 0),
+					new vscode.Position(5, 3)
+				),
+				severity: vscode.DiagnosticSeverity.Warning,
+				source: 'sample'
+			},
 		]);
 	});
 });

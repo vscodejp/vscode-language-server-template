@@ -46,7 +46,7 @@ export async function activate(context: ExtensionContext) {
 
 	try {
 		// LSPを起動
-		client = new LanguageClient('Sample LSP Server', serverOptions, clientOptions);
+		client = new LanguageClient('LSPSampleExample', 'Sample LSP Server', serverOptions, clientOptions);
 	} catch (err) {
 		void Window.showErrorMessage('拡張機能の起動に失敗しました。詳細はアウトプットパネルを参照ください');
 		return;

@@ -27,6 +27,25 @@
 	"activationEvents": [
 		"*"
 	],
+	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "LSP configuration",
+			"properties": {
+				"LSPSampleExample.trace.server": {
+				"scope": "window",
+				"type": "string",
+				"enum": [
+					"off",
+					"messages",
+					"verbose"
+				],
+				"default": "verbose",
+				"description": "VS CodeとLSPの間でのトレースを表示する"
+				}
+			}
+		}
+	},
 	"main": "./client/out/extension",
 	"scripts": {
 		"vscode:prepublish": "npm run webpack",

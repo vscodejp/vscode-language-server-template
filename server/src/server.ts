@@ -43,12 +43,14 @@ connection.onInitialize((_params, _cancel, progress) => {
 			textDocumentSync: {
 				openClose: true,
 				change: TextDocumentSyncKind.Incremental,
+				resolveProvider: true,
 				willSaveWaitUntil: false,
 				save: {
 					includeText: false,
 				}
 			},
 			completionProvider: {
+				codeActionKinds: [ CodeActionKind.QuickFix ],
 				resolveProvider: true
 			}
 		},
@@ -87,7 +89,7 @@ function validate(doc: TextDocument) {
 	}
 
 	// VS Codeに警告リストを送信
-	void connection.sendDiagnostics({ uri: doc.uri, diagnostics });
+	void connection.sendDiagnostics({ uri: doc.uri, version: doc.version, diagnostics });
 }
 
 
@@ -125,7 +127,7 @@ function setupDocumentsListeners() {
 			const fileUri = textDocumentPosition.textDocument.uri;
 			return [
 				{
-					label: fileUri.substr(fileUri.lastIndexOf('/') + 1),
+					label: fileUri.substring(fileUri.lastIndexOf('/') + 1),
 					kind: CompletionItemKind.Text,
 					data: 2
 				}
@@ -177,6 +179,7 @@ function setupDocumentsListeners() {
 		// sampleから生成した警告のみを対象とする
 		const diagnostics = params.context.diagnostics.filter((diag) => diag.source === 'sample');
 		// 対象ファイルを取得する
+		console.log(params.textDocument.uri);
 		const textDocument = documents.get(params.textDocument.uri);
 		if (textDocument === undefined || diagnostics.length === 0) {
 			return [];
@@ -191,11 +194,16 @@ function setupDocumentsListeners() {
 			// 該当箇所を小文字に変更
 			const edits = [TextEdit.replace(diag.range, originalText.toLowerCase())];
 			const editPattern = { documentChanges: [
-				TextDocumentEdit.create({uri: textDocument.uri,
-											 version: textDocument.version},
-				edits)] };
+				TextDocumentEdit.create(
+					{
+						uri: textDocument.uri,
+						version: textDocument.version
+					},
+					edits)
+			]};
 				// コードアクションを生成
-			const fixAction = CodeAction.create(title,
+			const fixAction = CodeAction.create(
+				title,
 				editPattern,
 				CodeActionKind.QuickFix);
 				// コードアクションと警告を関連付ける

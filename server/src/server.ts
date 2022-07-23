@@ -16,22 +16,27 @@ import {
 	TextDocuments,
 	TextDocumentSyncKind,
 	TextEdit,
+	WorkspaceEdit,
 } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
+
+namespace CommandIDs {
+	export const fix = 'sample.fix';
+}
 
 // サーバー接続オブジェクトを作成する。この接続にはNodeのIPC(プロセス間通信)を利用する
 // LSPの全機能を提供する
 const connection = createConnection(ProposedFeatures.all);
 connection.console.info(`Sample server running in node ${process.version}`);
-// 初期化ハンドルでインスタンス化する
-let documents!: TextDocuments<TextDocument>;
+
+// ドキュメントを作成、変更、閉じる作業を監視するマネージャー
+const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
+documents.listen(connection);
 
 // 接続の初期化
 connection.onInitialize((_params, _cancel, progress) => {
 	// サーバーの起動を進捗表示する
 	progress.begin('Initializing Sample Server');
-	// テキストドキュメントを監視する
-	documents = new TextDocuments(TextDocument);
 	setupDocumentsListeners();
 	// 起動進捗表示の終了
 	progress.done();
@@ -50,8 +55,14 @@ connection.onInitialize((_params, _cancel, progress) => {
 				}
 			},
 			completionProvider: {
+				resolveProvider: true
+			},
+			codeActionProvider: {
 				codeActionKinds: [ CodeActionKind.QuickFix ],
 				resolveProvider: true
+			},
+			executeCommandProvider: {
+				commands: [ CommandIDs.fix ]
 			}
 		},
 	} as InitializeResult;
@@ -97,9 +108,6 @@ function validate(doc: TextDocument) {
  * ドキュメントの動作を監視する
  */
 function setupDocumentsListeners() {
-	// ドキュメントを作成、変更、閉じる作業を監視するマネージャー
-	documents.listen(connection);
-
 	// 補完機能の要素リスト
 	connection.onCompletion(
 		(textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
@@ -179,9 +187,8 @@ function setupDocumentsListeners() {
 		// sampleから生成した警告のみを対象とする
 		const diagnostics = params.context.diagnostics.filter((diag) => diag.source === 'sample');
 		// 対象ファイルを取得する
-		console.log(params.textDocument.uri);
 		const textDocument = documents.get(params.textDocument.uri);
-		if (textDocument === undefined || diagnostics.length === 0) {
+		if (textDocument === undefined) {
 			return [];
 		}
 		const codeActions: CodeAction[] = [];
@@ -190,10 +197,10 @@ function setupDocumentsListeners() {
 			// アクションの目的
 			const title = 'Fix to lower case';
 			// 警告範囲の文字列取得
-			const originalText = textDocument.getText(diag.range);
+			// const originalText = textDocument.getText(diag.range);
 			// 該当箇所を小文字に変更
-			const edits = [TextEdit.replace(diag.range, originalText.toLowerCase())];
-			const editPattern = { documentChanges: [
+			const edits = [TextEdit.replace(diag.range, 'originalText.toLowerCase()')];
+			const editPattern: WorkspaceEdit = { documentChanges: [
 				TextDocumentEdit.create(
 					{
 						uri: textDocument.uri,

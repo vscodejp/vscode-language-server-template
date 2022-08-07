@@ -60,7 +60,7 @@ function validate(doc: TextDocument) {
 		// 警告範囲
 		range: range,
 		// 警告メッセージ
-		message: 'Hello world',
+		message: 'Hello World!',
 		// 警告の重要度、Error, Warning, Information, Hintのいずれかを選ぶ
 		severity: DiagnosticSeverity.Warning,
 		// 警告コード、警告コードを識別するために使用する
@@ -70,7 +70,7 @@ function validate(doc: TextDocument) {
 	};
 	diagnostics.push(diagnostic);
 	//接続に警告を通知する
-	connection.sendDiagnostics({ uri: doc.uri, diagnostics });
+	void connection.sendDiagnostics({ uri: doc.uri, diagnostics });
 }
 
 
@@ -101,7 +101,7 @@ function setupDocumentsListeners() {
 		// ドキュメントのURI(ファイルパス)を取得する
 		const uri = close.document.uri;
 		// 警告を削除する
-		connection.sendDiagnostics({ uri: uri, diagnostics: []});
+		void connection.sendDiagnostics({ uri: uri, diagnostics: []});
 	});
 }
 

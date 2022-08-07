@@ -14,13 +14,13 @@
 		"url": "https://github.com/Ikuyadeu/vscode-language-server-template/issues"
 	},
 	"engines": {
-		"vscode": "^1.67.0"
+		"vscode": "^1.69.1"
 	},
 	"devDependencies": {
-		"@types/vscode": "1.67.0"
+		"@types/vscode": "1.69.1"
 	},
 	"dependencies": {
-		"vscode-languageclient": "8.0.1",
-		"@vscode/test-electron": "^2.1.3"
+		"vscode-languageclient": "8.0.2",
+		"@vscode/test-electron": "^2.1.5"
 	}
 }
